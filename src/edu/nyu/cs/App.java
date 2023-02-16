@@ -30,9 +30,11 @@ public class App {
   public static void main(String[] args) throws Exception {
     String filePath = getFilepathFromUser();
     String[] tics = getTicsFromUser();
+    String fullText = getContentsOfFile(filePath);
     System.out.println("...............................Analyzing text.................................");
-    
-
+    for(int i = 0; i<tics.length;i++){
+      System.out.println("There are "+countOccurrences(tics[i],fullText)+" occurrences of tic "+ tics[i]);
+    }
   }
 
   /**
@@ -116,13 +118,13 @@ public class App {
    */
 
     // write the countOccurrences function according to the instructions
-    public static int countOccurrences(String haystack, String needle){
+    public static int countOccurrences(String needle, String haystack){
       String[] words = haystack.split("[ \n\t.,?!-]+");
       int Occurrences = 0;
       for (String word: words){
         String strippedWord = word.toLowerCase().strip();
         if (strippedWord.equals(needle.toLowerCase().strip())){
-          Occurrences++;
+          ++Occurrences;
         }
       }
       return Occurrences;
