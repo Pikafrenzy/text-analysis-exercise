@@ -115,6 +115,16 @@ public class App {
    */
 
     // write the countOccurrences function according to the instructions
+    public static int countOccurences(String haystack, String needle){
+      String[] words = haystack.split("[ \n\t.,?!-]+");
+      int Occurences = 0;
+      for (String word: words){
+        if (word == needle){
+          Occurences++;
+        }
+      }
+      return Occurences;
+    }
 
   /**
    * calculatePercentage method
@@ -123,7 +133,12 @@ public class App {
    * @param num2 The overall number out of which the num1 number is taken.  i.e. the denominator in the ratio of num1 to num2.
    * @return The percentage that rum1 represents out of the total of num2, rounded to the nearest integer.
    */
-
+    public static int calculatePercentage(int num1, int num2){
+      double doubleNum1 = (double) num1;
+      double doubleNum2 = (double) num2;
+      int percentage = (int) Math.round((doubleNum1/doubleNum2)*100);
+      return percentage;
+    }
     // write the calculatePercentage function according to the instructions above
 
 
@@ -138,7 +153,15 @@ public class App {
    * @param fullText The full text.
    * @return The proportion of the number of tic words present in the text to the total number of words in the text, as a double.
    */
-
+    public static double calculateTicDensity(String[]tics, String fullText){
+      int totalTicCount = 0;
+      for (int i = 0; i<tics.length;i++){
+        totalTicCount+=countOccurences(fullText,tics[i]);
+      }
+      String[] fullTextWords = fullText.split("[ \n\t.,?!-]+");
+      double ticDensity = ((double)totalTicCount)/((double)fullTextWords.length);
+      return ticDensity;
+    }
     // write the calculateTicDensity function according to the instructions above
 
     
