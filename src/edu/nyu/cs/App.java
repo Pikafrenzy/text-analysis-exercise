@@ -10,7 +10,8 @@ import java.util.Scanner;
  */
 public class App {
 
-  // use this "global"-ish Scanner variable when getting keyboard input from the user within any function; this avoids common problems using several different Scanners within different functions
+  // use this "global"-ish Scanner variable when getting keyboard input from the user within any function; 
+  //this avoids common problems using several different Scanners within different functions
   public static Scanner scn = new Scanner(System.in);
 
   /**
@@ -27,8 +28,10 @@ public class App {
    * @param args An array of any command-line arguments.
    */
   public static void main(String[] args) throws Exception {
-
+    String filePath = getFilepathFromUser();
+    String[] tics = getTicsFromUser();
     // complete this function according to the instructions
+    
 
   }
 
@@ -41,9 +44,10 @@ public class App {
    * @return The file path that the user enters, e.g. "data/trump_speech_010621.txt"
    */
   public static String getFilepathFromUser() {
-
     // complete the getFilepathFromUser function according to the instructions above
-
+    System.out.println("What file would you like to open?");
+    String filePath = scn.nextLine();
+    return filePath;
   }
 
 
@@ -84,7 +88,21 @@ public class App {
    *  - do not close the "global"-ish Scanner so that you can use it in other functions
    * @return A String array containing each of the tics to analyze, with any leading or trailing whitespace removed from each tic.
    */
-
+  public static String[] getTicsFromUser(){
+    try{
+      System.out.println("What words would you like to search for?");
+      String commaTicList = scn.nextLine();
+      String[] tics = commaTicList.split(",");
+      for (int i = 0; i<tics.length; i++){
+        tics[i] = tics[i].strip();
+      }
+      return tics;
+    }
+    catch (Exception e){
+      System.out.println("Bug in getTicsFromUser");
+      return null;
+    }
+  }
     // write the getTicsFromUser function according to the instructions
 
 
