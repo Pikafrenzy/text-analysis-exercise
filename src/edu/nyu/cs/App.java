@@ -31,10 +31,30 @@ public class App {
     String filePath = getFilepathFromUser();
     String[] tics = getTicsFromUser();
     String fullText = getContentsOfFile(filePath);
+
+    System.out.println("");
     System.out.println("...............................Analyzing text.................................");
-    for(int i = 0; i<tics.length;i++){
-      System.out.println("There are "+countOccurrences(tics[i],fullText)+" occurrences of tic "+ tics[i]);
+    System.out.println("");
+
+    int totalTics = 0;
+    for (String tic:tics){
+      totalTics+= countOccurrences(tic, fullText);
     }
+
+    System.out.println("Total number of tics: " + totalTics);
+    System.out.println("Density of tics: " + calculateTicDensity(tics, fullText));
+
+    System.out.println("");
+    System.out.println("...............................Tic breakdown..................................");
+    System.out.println("");
+
+    for (String tic:tics){
+      String formattedTic = String.format("%-10s",tic);
+      String formattedOccurrences = String.format("%-19d",countOccurrences(tic,fullText));
+      int percentage = calculatePercentage(countOccurrences(tic, fullText), totalTics);
+      System.out.println(formattedTic+"/ "+formattedOccurrences+"/ "+percentage+"% of all tics");
+    }
+
   }
 
   /**
@@ -160,11 +180,11 @@ public class App {
     public static double calculateTicDensity(String[]tics, String fullText){
       int totalTicCount = 0;
       for (int i = 0; i<tics.length;i++){
-        totalTicCount+=countOccurrences(fullText,tics[i]);
+        totalTicCount+=countOccurrences(tics[i],fullText);
       }
       String[] fullTextWords = fullText.split("[ \n\t.,?!-]+");
       double ticDensity = ((double)totalTicCount)/((double)fullTextWords.length);
-      double roundedTicDensity = Math.round(ticDensity*100)/100;
+      double roundedTicDensity = Math.round(ticDensity*100)/100.0;
       return roundedTicDensity;
     }
     // write the calculateTicDensity function according to the instructions above
