@@ -30,7 +30,7 @@ public class App {
   public static void main(String[] args) throws Exception {
     String filePath = getFilepathFromUser();
     String[] tics = getTicsFromUser();
-    // complete this function according to the instructions
+    System.out.println("...............................Analyzing text.................................");
     
 
   }
@@ -95,6 +95,7 @@ public class App {
       String[] tics = commaTicList.split(",");
       for (int i = 0; i<tics.length; i++){
         tics[i] = tics[i].strip();
+        tics[i] = tics[i].toLowerCase();
       }
       return tics;
     }
@@ -115,15 +116,16 @@ public class App {
    */
 
     // write the countOccurrences function according to the instructions
-    public static int countOccurences(String haystack, String needle){
+    public static int countOccurrences(String haystack, String needle){
       String[] words = haystack.split("[ \n\t.,?!-]+");
-      int Occurences = 0;
+      int Occurrences = 0;
       for (String word: words){
-        if (word == needle){
-          Occurences++;
+        String strippedWord = word.toLowerCase().strip();
+        if (strippedWord.equals(needle.toLowerCase().strip())){
+          Occurrences++;
         }
       }
-      return Occurences;
+      return Occurrences;
     }
 
   /**
@@ -156,11 +158,12 @@ public class App {
     public static double calculateTicDensity(String[]tics, String fullText){
       int totalTicCount = 0;
       for (int i = 0; i<tics.length;i++){
-        totalTicCount+=countOccurences(fullText,tics[i]);
+        totalTicCount+=countOccurrences(fullText,tics[i]);
       }
       String[] fullTextWords = fullText.split("[ \n\t.,?!-]+");
       double ticDensity = ((double)totalTicCount)/((double)fullTextWords.length);
-      return ticDensity;
+      double roundedTicDensity = Math.round(ticDensity*100)/100;
+      return roundedTicDensity;
     }
     // write the calculateTicDensity function according to the instructions above
 
